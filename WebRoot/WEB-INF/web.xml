@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+  <display-name></display-name>	
+  
+<!-- 程序id，在tomcat中唯一，不可重复 --> 
+<context-param>
+    <param-name>webAppRootKey</param-name>
+    <param-value>aishangwen.root</param-value>
+</context-param>
+  
+  
+<!-- 移动端接口 --> 
+<servlet>
+    <servlet-name>apply</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/config/apply-servlet.xml</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+</servlet>
+<servlet-mapping>
+    <servlet-name>apply</servlet-name>
+    <url-pattern>*.app</url-pattern>
+</servlet-mapping>
+<!-- 网页端接口 --> 
+<servlet>
+    <servlet-name>web</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/config/web-servlet.xml</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+</servlet> 
+<servlet-mapping>
+    <servlet-name>web</servlet-name>
+    <url-pattern>*.do</url-pattern>
+</servlet-mapping>
+ 
+
+<!-- 配置log4j文件位置 -->  
+<context-param>   
+   <param-name>log4jConfigLocation</param-name>   
+   <param-value>/WEB-INF/config/log4j.properties</param-value>   
+</context-param> 
+  
+  
+<!-- 指定Spring Bean hibernate  的配置文件所在目录。默认配置在WEB-INF目录下 -->
+<context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>/WEB-INF/config/applicationContext.xml</param-value>
+</context-param>
+  
+  
+<!-- 定义LOG4J监听器 -->   
+<listener>   
+   <listener-class>   
+	org.springframework.web.util.Log4jConfigListener   
+   </listener-class>   
+</listener> 
+<!-- 监听 -->
+<listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+</listener>
+  
+<listener>
+		<listener-class>com.tool.ResourceConext</listener-class>
+</listener>
+  
+<!-- 项目主页文件配置 -->
+<welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+</welcome-file-list>
+</web-app>
