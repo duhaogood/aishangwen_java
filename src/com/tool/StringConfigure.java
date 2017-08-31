@@ -17,5 +17,7 @@ public class StringConfigure {
 	/*公司8099*/
 	public static String IMG_URL_HEADPREFIX = "";
 	
-	
+	/*
+	 * 实验一下这个东西是不是有
+	 */
 }

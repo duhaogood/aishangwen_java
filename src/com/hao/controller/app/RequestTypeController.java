@@ -22,6 +22,7 @@ public class RequestTypeController {
 	/**
 	 * 获取一级问题分类信息
 	 */
+	
 	@RequestMapping(value = "/getType_1.app")
 	private void getAllType_1(HttpServletRequest request,
 			HttpServletResponse response){
