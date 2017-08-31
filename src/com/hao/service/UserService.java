@@ -1,13 +1,24 @@
 package com.hao.service;
 
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import cn.jiguang.common.ClientConfig;
+import cn.jiguang.common.resp.APIConnectionException;
+import cn.jiguang.common.resp.APIRequestException;
+import cn.jpush.api.JPushClient;
+import cn.jpush.api.push.PushResult;
+import cn.jpush.api.push.model.PushPayload;
+
 import com.hao.dao.BaseDao;
 import com.hao.entity.UserEntity;
 import com.tool.DHTool;
+import com.tool.StringConfigure;
 import com.tool.model.ReturnModel;
 
 @Service(value = "userService")
@@ -48,10 +59,37 @@ public class UserService {
 			model.setValue(user);
 			model.setMsg("登录成功");
 			DHTool.getInfoLog().info(user_name + "--登录成功");
+			
+			
+			JPushClient jpushClient = 
+					new JPushClient(StringConfigure.JG_MASTER_SECRET, 
+							StringConfigure.JG_APP_KEY, null, 
+							ClientConfig.getInstance());
+			
+		    // For push, all you need do is to build PushPayload object.
+		    PushPayload payload = buildPushObject_all_all_alert();
+
+		    try {
+		        PushResult result = jpushClient.sendPush(payload);
+
+		    } catch (APIConnectionException e) {
+		        // Connection error, should retry later
+
+		    } catch (APIRequestException e) {
+		        // Should review the error, and fix the request
+		    	
+		    }
+			
+			
 			return model;
 		}
 		model.setMsg("密码错误");
 		return model;
+	}
+
+	private PushPayload buildPushObject_all_all_alert() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	/**

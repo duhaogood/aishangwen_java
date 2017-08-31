@@ -20,4 +20,12 @@ public class StringConfigure {
 	/*
 	 * 实验一下这个东西是不是有
 	 */
+	
+	
+	/*极光参数*/
+	public static String JG_MASTER_SECRET = "d97a5ed7e0574f413e2fbe91 ";
+	public static String JG_APP_KEY = "b25a7565f2b1fdb0fd96231e";
+	
+	
+	
 }
